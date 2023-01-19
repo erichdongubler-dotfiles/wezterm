@@ -59,4 +59,5 @@ return {
 	font_size = 13.0,
 	-- Disable ligatures; I dun like 'em.
 	harfbuzz_features = { "calt=0", "clig=0", "liga=0" },
+	selection_word_boundary = " \t\n{}[]()\"'`.,;:", -- asdf:asdf:asdf
 }
