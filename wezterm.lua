@@ -4,6 +4,11 @@ wezterm.on("update-right-status", function(window, pane)
 	window:set_right_status(window:active_workspace())
 end)
 
+-- NOTE: `--` == '-' in Lua strings
+is_macos = not not wezterm.target_triple:find("--apple--darwin$")
+
+font_size = is_macos and 17.0 or 13.0
+
 return {
 	colors = {
 		foreground = "#CCCCCC",
@@ -56,7 +61,7 @@ return {
 		quick_select_match_fg = { Color = "#ffffff" },
 	},
 	default_prog = { "nu", "-l" },
-	font_size = 13.0,
+	font_size = font_size,
 	-- Disable ligatures; I dun like 'em.
 	harfbuzz_features = { "calt=0", "clig=0", "liga=0" },
 	selection_word_boundary = " \t\n{}[]()\"'`.,;:", -- asdf:asdf:asdf
