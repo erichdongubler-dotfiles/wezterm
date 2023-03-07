@@ -7,6 +7,19 @@ end)
 -- NOTE: `--` == '-' in Lua strings
 is_macos = not not wezterm.target_triple:find("--apple--darwin$")
 
+function test_nu_bin(bin)
+	local succeeded = xpcall(
+		function()
+			wezterm.run_child_process({ bin, "-c", "exit" })
+		end,
+		function(err)
+			print("failed to run `nu` binary (configged as `" .. bin .. "`):\n" .. err)
+		end
+	)
+	return succeeded and bin or nil
+end
+local nu_bin = is_macos and test_nu_bin("/opt/homebrew/bin/nu") or test_nu_bin("nu")
+
 font_size = is_macos and 17.0 or 13.0
 
 return {
@@ -60,7 +73,7 @@ return {
 		quick_select_match_bg = { AnsiColor = "Navy" },
 		quick_select_match_fg = { Color = "#ffffff" },
 	},
-	default_prog = { "nu", "-l" },
+	default_prog = nu_bin and { nu_bin, "-l" } or nil,
 	font_size = font_size,
 	-- Disable ligatures; I dun like 'em.
 	harfbuzz_features = { "calt=0", "clig=0", "liga=0" },
