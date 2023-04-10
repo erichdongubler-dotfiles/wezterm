@@ -8,14 +8,11 @@ end)
 is_macos = not not wezterm.target_triple:find("--apple--darwin$")
 
 function test_nu_bin(bin)
-	local succeeded = xpcall(
-		function()
-			wezterm.run_child_process({ bin, "-c", "exit" })
-		end,
-		function(err)
-			print("failed to run `nu` binary (configged as `" .. bin .. "`):\n" .. err)
-		end
-	)
+	local succeeded = xpcall(function()
+		wezterm.run_child_process({ bin, "-c", "exit" })
+	end, function(err)
+		print("failed to run `nu` binary (configged as `" .. bin .. "`):\n" .. err)
+	end)
 	return succeeded and bin or nil
 end
 local nu_bin = is_macos and test_nu_bin("/opt/homebrew/bin/nu") or test_nu_bin("nu")
