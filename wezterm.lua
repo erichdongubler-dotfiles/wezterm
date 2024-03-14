@@ -89,5 +89,5 @@ return {
 	font_size = font_size,
 	-- Disable ligatures; I dun like 'em.
 	harfbuzz_features = { "calt=0", "clig=0", "liga=0" },
-	selection_word_boundary = " \t\n{}[]()\"'`.,;:", -- asdf:asdf:asdf
+	selection_word_boundary = " \t\n{}[]()\"'\\/`.,;:",
 }
