@@ -90,4 +90,16 @@ return {
 	-- Disable ligatures; I dun like 'em.
 	harfbuzz_features = { "calt=0", "clig=0", "liga=0" },
 	selection_word_boundary = " \t\n{}[]()\"'\\/`.,;:",
+	skip_close_confirmation_for_processes_named = {
+		"bash",
+		"sh",
+		"zsh",
+		"fish",
+		"tmux",
+		"nu",
+		"nu.exe",
+		"cmd.exe",
+		"pwsh.exe",
+		"powershell.exe",
+	},
 }
