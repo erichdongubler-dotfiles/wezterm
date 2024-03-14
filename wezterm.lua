@@ -1,5 +1,12 @@
 local wezterm = require("wezterm")
 
+if wezterm.target_triple == "x86_64-pc-windows-msvc" then
+	wezterm.on("gui-startup", function()
+		local tab, pane, window = wezterm.mux.spawn_window({})
+		window:gui_window():set_inner_size(1200, 600)
+	end)
+end
+
 -- Shamelessly stolen from <https://wezfurlong.org/wezterm/config/lua/PaneInformation.html>
 function basename(s)
 	return string.gsub(s, "(.*[/\\])(.*)", "%2")
