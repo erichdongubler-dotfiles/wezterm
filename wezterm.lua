@@ -19,6 +19,24 @@ wezterm.on("update-right-status", function(window, pane)
 	window:set_right_status(window:active_workspace() .. "  ")
 end)
 
+wezterm.on("augment-command-palette", function(window, pane)
+	return {
+		{
+			brief = "Rename tab",
+			icon = "md_rename_box",
+
+			action = act.PromptInputLine({
+				description = "Enter new name for tab",
+				action = wezterm.action_callback(function(window, pane, line)
+					if line then
+						window:active_tab():set_title(line)
+					end
+				end),
+			}),
+		},
+	}
+end)
+
 -- NOTE: `--` == '-' in Lua strings
 is_macos = not not wezterm.target_triple:find("--apple--darwin$")
 
@@ -111,6 +129,7 @@ return {
 			action = wezterm.action.DisableDefaultAssignment,
 		},
 	},
+	launch_menu = launch_menu,
 	selection_word_boundary = " \t\n{}[]()\"'\\/`.,;:",
 	skip_close_confirmation_for_processes_named = {
 		"bash",
