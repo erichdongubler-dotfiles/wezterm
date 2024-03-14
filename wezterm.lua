@@ -5,8 +5,17 @@ function basename(s)
 	return string.gsub(s, "(.*[/\\])(.*)", "%2")
 end
 
+-- function strip_exe(p)
+-- 	return string.gsub(p, "(.*)\\.exe$", "%1")
+-- end
+
 wezterm.on("format-tab-title", function(tab, _, _, _, _, _)
 	local current_dir = basename(tab.active_pane.current_working_dir)
+
+	-- local process_short_name = basename(pane.foreground_process_name)
+	-- if wezterm.target_triple == 'x86_64-pc-windows-msvc' then
+	--
+	-- end
 
 	local title = pane.pane_id .. ": " .. current_dir
 
