@@ -85,6 +85,7 @@ return {
 		quick_select_match_bg = { AnsiColor = "Navy" },
 		quick_select_match_fg = { Color = "#ffffff" },
 	},
+	-- default_gui_startup_args = { "connect", "erichdongubler" },
 	default_prog = nu_bin and { nu_bin, "-l" } or nil,
 	font_size = font_size,
 	-- Disable ligatures; I dun like 'em.
