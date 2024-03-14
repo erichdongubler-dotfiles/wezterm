@@ -1,5 +1,20 @@
 local wezterm = require("wezterm")
 
+-- Shamelessly stolen from <https://wezfurlong.org/wezterm/config/lua/PaneInformation.html>
+function basename(s)
+	return string.gsub(s, "(.*[/\\])(.*)", "%2")
+end
+
+wezterm.on("format-tab-title", function(tab, _, _, _, _, _)
+	local current_dir = basename(tab.active_pane.current_working_dir)
+
+	local title = pane.pane_id .. ": " .. current_dir
+
+	return {
+		{ Text = " " .. title .. " " },
+	}
+end)
+
 wezterm.on("update-right-status", function(window, pane)
 	window:set_right_status(window:active_workspace() .. "  ")
 end)
