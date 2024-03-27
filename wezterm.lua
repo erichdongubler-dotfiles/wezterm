@@ -13,12 +13,26 @@ function basename(s)
 end
 
 wezterm.on("format-tab-title", function(tab, _, _, _, _, _)
-	local current_dir = basename(tab.active_pane.current_working_dir)
+	local title = tab.tab_title
 
-	local title = pane.pane_id .. ": " .. current_dir
+	if not title or title == "" then
+		title = basename(tab.active_pane.current_working_dir.file_path)
+			.. ": "
+			.. basename(tab.active_pane.foreground_process_name)
+	end
+
+	title = title or ""
+
+	title = tab.active_pane.pane_id .. ": " .. title
+
+	if tab.active_pane.is_zoomed then
+		title = "[Z] " .. title
+	end
+
+	title = " " .. title -- to have the right padding on the left
 
 	return {
-		{ Text = " " .. title .. " " },
+		{ Text = title },
 	}
 end)
 
@@ -92,6 +106,7 @@ return {
 		quick_select_match_bg = { AnsiColor = "Navy" },
 		quick_select_match_fg = { Color = "#ffffff" },
 	},
+	-- default_gui_startup_args = { "connect", "erichdongubler" },
 	default_prog = nu_bin and { nu_bin, "-l" } or nil,
 	font_size = font_size,
 	-- Disable ligatures; I dun like 'em.
@@ -130,5 +145,10 @@ return {
 		"cmd.exe",
 		"pwsh.exe",
 		"powershell.exe",
+	},
+	unix_domains = {
+		{
+			name = "erichdongubler",
+		},
 	},
 }
