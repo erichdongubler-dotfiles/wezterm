@@ -89,6 +89,28 @@ return {
 	font_size = font_size,
 	-- Disable ligatures; I dun like 'em.
 	harfbuzz_features = { "calt=0", "clig=0", "liga=0" },
+	keys = {
+		{
+			key = "PageDown",
+			mods = "CTRL",
+			action = wezterm.action.DisableDefaultAssignment,
+		},
+		{
+			key = "PageUp",
+			mods = "CTRL",
+			action = wezterm.action.DisableDefaultAssignment,
+		},
+		{
+			key = "PageDown",
+			mods = "CTRL|SHIFT",
+			action = wezterm.action.DisableDefaultAssignment,
+		},
+		{
+			key = "PageUp",
+			mods = "CTRL|SHIFT",
+			action = wezterm.action.DisableDefaultAssignment,
+		},
+	},
 	selection_word_boundary = " \t\n{}[]()\"'\\/`.,;:",
 	skip_close_confirmation_for_processes_named = {
 		"bash",
