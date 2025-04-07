@@ -136,9 +136,9 @@ return {
 		"pwsh.exe",
 		"powershell.exe",
 	},
-	unix_domains = {
-		{
-			name = "erichdongubler",
-		},
-	},
+	-- unix_domains = {
+	-- 	{
+	-- 		name = "erichdongubler",
+	-- 	},
+	-- },
 }
