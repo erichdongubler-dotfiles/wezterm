@@ -9,9 +9,8 @@ wezterm.on("format-tab-title", function(tab, _, _, _, _, _)
 	local title = tab.tab_title
 
 	if not title or title == "" then
-		title = basename(tab.active_pane.current_working_dir.file_path)
-			.. ": "
-			.. basename(tab.active_pane.foreground_process_name)
+		title = basename(tab.active_pane.current_working_dir.file_path) .. ": "
+		-- .. basename(tab.active_pane.foreground_process_name)
 	end
 
 	title = title or ""
