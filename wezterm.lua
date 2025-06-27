@@ -16,9 +16,8 @@ wezterm.on("format-tab-title", function(tab, _, _, _, _, _)
 	local title = tab.tab_title
 
 	if not title or title == "" then
-		title = basename(tab.active_pane.current_working_dir.file_path)
-			.. ": "
-			.. basename(tab.active_pane.foreground_process_name)
+		title = basename(tab.active_pane.current_working_dir.file_path) .. ": "
+		-- .. basename(tab.active_pane.foreground_process_name)
 	end
 
 	title = title or ""
@@ -38,6 +37,24 @@ end)
 
 wezterm.on("update-right-status", function(window, pane)
 	window:set_right_status(window:active_workspace() .. "  ")
+end)
+
+wezterm.on("augment-command-palette", function(window, pane)
+	return {
+		{
+			brief = "Rename tab",
+			icon = "md_rename_box",
+
+			action = act.PromptInputLine({
+				description = "Enter new name for tab",
+				action = wezterm.action_callback(function(window, pane, line)
+					if line then
+						window:active_tab():set_title(line)
+					end
+				end),
+			}),
+		},
+	}
 end)
 
 -- NOTE: `--` == '-' in Lua strings
@@ -133,6 +150,7 @@ return {
 			action = wezterm.action.DisableDefaultAssignment,
 		},
 	},
+	launch_menu = launch_menu,
 	selection_word_boundary = " \t\n{}[]()\"'\\/`.,;:",
 	skip_close_confirmation_for_processes_named = {
 		"bash",
@@ -146,9 +164,9 @@ return {
 		"pwsh.exe",
 		"powershell.exe",
 	},
-	unix_domains = {
-		{
-			name = "erichdongubler",
-		},
-	},
+	-- unix_domains = {
+	-- 	{
+	-- 		name = "erichdongubler",
+	-- 	},
+	-- },
 }
