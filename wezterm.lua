@@ -30,6 +30,7 @@ function test_nu_bin(bin)
 	end)
 	return succeeded and bin or nil
 end
+
 local nu_bin = is_macos and test_nu_bin("/opt/homebrew/bin/nu") or test_nu_bin("nu")
 
 font_size = is_macos and 17.0 or 13.0
