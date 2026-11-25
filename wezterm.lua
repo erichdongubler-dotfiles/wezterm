@@ -97,6 +97,11 @@ return {
 			action = wezterm.action.PasteFrom("Clipboard"),
 		},
 		{
+			key = "Insert",
+			mods = "CTRL",
+			action = wezterm.action.CopyTo("Clipboard"),
+		},
+		{
 			key = "PageDown",
 			mods = "CTRL",
 			action = wezterm.action.DisableDefaultAssignment,
