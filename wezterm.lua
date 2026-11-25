@@ -8,7 +8,7 @@ end
 wezterm.on("format-tab-title", function(tab, _, _, _, _, _)
 	local current_dir = basename(tab.active_pane.current_working_dir)
 
-	local title = pane.pane_id .. ": " .. current_dir
+	local title = tab.active_pane.pane_id .. ": " .. current_dir
 
 	return {
 		{ Text = " " .. title .. " " },
