@@ -91,6 +91,11 @@ return {
 	harfbuzz_features = { "calt=0", "clig=0", "liga=0" },
 	keys = {
 		{
+			key = "Insert",
+			mods = "SHIFT",
+			action = wezterm.action.PasteFrom("Clipboard"),
+		},
+		{
 			key = "PageDown",
 			mods = "CTRL",
 			action = wezterm.action.DisableDefaultAssignment,
